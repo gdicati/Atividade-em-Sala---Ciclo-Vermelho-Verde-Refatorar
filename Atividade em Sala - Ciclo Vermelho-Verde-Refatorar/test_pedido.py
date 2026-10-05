@@ -1,39 +1,35 @@
 """
-PLANO (passo 1) - Ciclo Vermelho-Verde-Refatorar
+Plano da atividade do ciclo Vermelho-Verde-Refatorar.
 
-Problema: fechamento de pedido de uma loja online. Dado o tipo de cliente e a lista
-de itens (preco_unitario, quantidade), calcular subtotal, desconto, frete e total.
+O problema é fazer o fechamento de um pedido de uma loja.
+Tem subtotal, desconto, frete e total.
 
-Casos que serao testados (tres variacoes de comportamento + validacoes):
-  1. Cliente "comum":     sem desconto, frete fixo de R$ 20,00.
-  2. Cliente "estudante": 15% de desconto sobre o subtotal, frete fixo de R$ 20,00.
-  3. Cliente "premium":   10% de desconto sobre o subtotal, frete gratis.
-  4. Tipo de cliente desconhecido -> ValueError.
-  5. Pedido sem itens -> ValueError.
+Os testes são:
+1. Cliente comum: sem desconto e frete de 20 reais.
+2. Estudante: 15% de desconto e frete de 20 reais.
+3. Premium: 10% de desconto e frete gratis.
+4. Tipo de cliente errado da erro.
+5. Pedido sem itens da erro.
 
-Padrao de projeto escolhido: Template Method (visto em aula).
-Por que: a sequencia do fechamento e igual para todo tipo de cliente
-(subtotal -> desconto -> frete -> total); so dois passos variam (desconto e frete).
-Na versao "verde" isso fica num if/elif; cada novo tipo de cliente obrigaria a mexer
-nessa cadeia e nada protegeria a ordem dos passos. O Template Method deixa a ordem
-em um unico lugar e faz cada tipo implementar apenas os dois passos que variam.
+Foi usado Template Method porque a conta é quase igual para todos.
+O que muda é o desconto e o frete.
 
-Tempo planejado (total 120 min):
-  - Plano: 10 min
-  - Vermelho (testes + ver falhar + commit red): 15 min
-  - Verde (implementacao direta + commit green): 10 min  -> red e green prontos aos 25 min
-  - Refatorar (Template Method + commit refactor): 50 min (inclui margem)
-  - Autoavaliacao e envio: 10 min
-  - Folga: 25 min
+Tempo planejado:
+- RED: 25 minutos
+- GREEN: 35 minutos
+- REFACTOR: 30 minutos
+- Teste final e autoavaliacao: 10 minutos
 
-Uso de IA: sim. A IA foi usada para propor o problema, escrever os testes, o codigo
-nas tres fases e rascunhar a autoavaliacao (detalhes no fim de pedido.py).
+Uso de IA: sim. A IA ajudou a montar os testes e o codigo das fases.
+O problema foi na organizacao dos commits. Em vez de deixar cada fase
+com seu codigo e seu commit separado, acabou ficando um commit com os
+tres updates. Isso deixou o historico diferente do que a atividade pedia.
 """
 import pytest
 
 from pedido import fechar_pedido
 
-ITENS = [(50.0, 2), (30.0, 1)]  # subtotal = 130,00
+ITENS = [(50.0, 2), (30.0, 1)]  # da 130 reais
 
 
 def test_cliente_comum_sem_desconto_e_com_frete_fixo():
